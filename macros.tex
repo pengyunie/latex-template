@@ -1,0 +1,106 @@
+%%% macros.tex
+%%% Import packages, define utility commands and define macros
+%%% Version 1.1.0
+
+%%%----------
+%%% Imports
+
+%%% Text Formatting
+\usepackage{xspace}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage[normalem]{ulem} % normalem do not replace \emph to underline
+\usepackage{amsmath}
+\usepackage{enumitem}
+
+%%% Reference, Citation and Link
+\usepackage{hyperref}
+%\usepackage{url}
+\usepackage{breakurl}
+%\usepackage{cite}
+
+%%% Tables
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{ragged2e}
+
+%%% Plots
+\usepackage{caption}
+\usepackage{subcaption}
+%\usepackage{subfloat}
+%\usepackage{wrapfig}
+
+% Code
+\usepackage{listings}
+
+% Tikz Figs
+\usepackage{tikz}
+%\usepackage{pgf-umlsd} % for flow diagram
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{positioning}
+%\usetikzlibrary{shapes}
+
+%%% Miscellaneous
+%\usepackage{flushend} % balance the end of double column document
+
+%%%----------
+%%% Utility Commands
+
+\newcommand{\XSpace}[1]{}
+\newcommand{\XComment}[1]{}
+\newcommand{\Fix}[1]{\textcolor{red}{#1}}
+\newcommand{\DefMacro}[2]{\expandafter\newcommand\csname rmk-#1\endcsname{#2}}
+\newcommand{\UseMacro}[1]{\csname rmk-#1\endcsname}
+
+\newcommand{\MyPara}[1]{\noindent\textbf{#1}.}
+\newcommand{\MyParaOnly}[1]{\noindent\textbf{#1}}
+\newcommand{\reducedstrut}{\vrule width 0pt height .9\ht\strutbox depth .9\dp\strutbox\relax}
+\newcommand{\InputWithSpace}[1]{\bgroup\def\arraystretch{1.1}\input{#1}\egroup}
+\newcommand{\Code}[1]{{\ifmmode{\mathtt{#1}}\else$\mathtt{#1}$\fi}}
+\newcommand{\CodeIn}[1]{{\ifmmode{\mathtt{#1}}\else$\mathtt{#1}$\fi}}
+\newcommand{\ColorBack}[1]{%
+  \begingroup
+  \setlength{\fboxsep}{0pt}%
+  \colorbox{purple!20}{\reducedstrut#1\/}%
+  \endgroup
+}
+
+% for table headers
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+\newcolumntype{R}[1]{>{\RaggedLeft\arraybackslash}p{#1}}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+
+\input{defs-logic} % for logic symbols
+\input{defs-code} % for code listings
+
+
+%%%----------
+%%% Macros
+
+%%% Text
+
+%\newcommand{\Tool}{\textsc{Tool}\xspace}
+\newcommand{\Title}{Title}
+
+%\newcommand{\CamelCase}{Title Case\xspace}
+%\newcommand{\Firstcap}{First cap\xspace}
+%\newcommand{\lowercase}{lower case\xspace}
+
+%%% Tables
+
+% Captions
+%\newcommand{\TableCaptionXXX}{Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit.\label{fig:table:xxx}}
+
+% Headers
+%\newcommand{\TableHeadXXX}{Yyy\xspace}
+
+
+%%% Numbers
+
+%\input{tables/numbers-xxx}
+
+%\newcommand{\NumXXX}{42\xspace}

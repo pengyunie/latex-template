@@ -1,6 +1,6 @@
 %%% macros.tex
 %%% Import packages, define utility commands and define macros
-%%% Version 1.1.0
+%%% Version 1.2.0
 
 %%%----------
 %%% Imports
@@ -52,6 +52,9 @@
 \newcommand{\XSpace}[1]{}
 \newcommand{\XComment}[1]{}
 \newcommand{\Fix}[1]{\textcolor{red}{#1}}
+\newcommand{\EditAdd}[1]{\textcolor{green}{[#1]}}
+\newcommand{\EditRm}[1]{\textcolor{red}{[\sout{#1}]}}
+\newcommand{\EditMod}[2]{\textcolor{red}{[\sout{#1}]}\textcolor{green}{[#2]}}
 \newcommand{\DefMacro}[2]{\expandafter\newcommand\csname rmk-#1\endcsname{#2}}
 \newcommand{\UseMacro}[1]{\csname rmk-#1\endcsname}
 
@@ -86,9 +89,12 @@
 %\newcommand{\Tool}{\textsc{Tool}\xspace}
 \newcommand{\Title}{Title}
 
-%\newcommand{\CamelCase}{Title Case\xspace}
-%\newcommand{\Firstcap}{First cap\xspace}
 %\newcommand{\lowercase}{lower case\xspace}
+%\newcommand{\Firstcap}{First cap\xspace}
+%\newcommand{\CamelCase}{Camel Case\xspace}
+
+%%% Code
+%\newcommand{\aVar}{\CodeIn{var}\xspace}
 
 %%% Tables
 

@@ -35,9 +35,10 @@
 %%   Right bracket \]     Circumflex    \^     Underscore    \_
 %%   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %%   Right brace   \}     Tilde         \~}
+\label{sec:ug_topmatter}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{acmart}
-[2019/04/22 v1.60 Typesetting articles for the Association for
+[2019/05/27 v1.61 Typesetting articles for the Association for
 Computing Machinery]
 \def\@classname{acmart}
 \InputIfFileExists{acmart-preload-hook.tex}{%
@@ -2117,7 +2118,8 @@ Computing Machinery]
 \newdimen\author@bx@wd
 \newskip\author@bx@sep
 \author@bx@sep=1pc\relax
-\def\@typeset@author@bx{\bgroup\hsize=\author@bx@wd\def\and{\par}%
+\def\@typeset@author@bx{\bgroup\hsize=\author@bx@wd
+  \def\and{\par}\normalbaselines
   \global\setbox\author@bx=\vtop{\if@ACM@sigchiamode\else\centering\fi
     \@authorfont\@currentauthors\par\@affiliationfont
     \@currentaffiliation}\egroup

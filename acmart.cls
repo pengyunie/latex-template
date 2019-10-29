@@ -35,11 +35,9 @@
 %%   Right bracket \]     Circumflex    \^     Underscore    \_
 %%   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %%   Right brace   \}     Tilde         \~}
-\label{sec:ug_topmatter}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{acmart}
-[2019/05/27 v1.61 Typesetting articles for the Association for
-Computing Machinery]
+[2019/10/19 v1.65 Typesetting articles for the Association for Computing Machinery]
 \def\@classname{acmart}
 \InputIfFileExists{acmart-preload-hook.tex}{%
   \ClassWarning{\@classname}{%
@@ -871,9 +869,12 @@ Computing Machinery]
   \endlist
 }
 \let\enddescription=\endlist % for efficiency
+\newif\if@ACM@maketitle@typeset
+\@ACM@maketitle@typesetfalse
 \define@choicekey*+{ACM}{acmJournal}[\@journalCode\@journalCode@nr]{%
   CIE,%
   CSUR,%
+  DGOV,%
   DTRAP,%
   HEALTH,%
   IMWUT,%
@@ -897,6 +898,7 @@ Computing Machinery]
   TDS,%
   TEAC,%
   TECS,%
+  TELO,%
   THRI,%
   TIIS,%
   TIOT,%
@@ -924,11 +926,13 @@ Computing Machinery]
   TOS,%
   TOSEM,%
   TOSN,%
+  TQC,%
   TRETS,%
   TSAS,%
   TSC,%
   TSLP,%
-  TWEB%
+  TWEB,%
+  FACMP%
 }{%
 \ifcase\@journalCode@nr
 \relax % CIE
@@ -939,6 +943,10 @@ Computing Machinery]
   \def\@journalName{ACM Computing Surveys}%
   \def\@journalNameShort{ACM Comput. Surv.}%
   \def\@permissionCodeOne{0360-0300}%
+\or % DGOV
+  \def\@journalName{Digital Government: Research and Practice}%
+  \def\@journalNameShort{Digit. Gov. Res. Pract.}%
+  \def\@permissionCodeOne{2639-0175}%
 \or % DTRAP
   \def\@journalName{Digital Threats: Research and Practice}%
   \def\@journalNameShort{Digit. Threat. Res. Pract.}%
@@ -1034,6 +1042,10 @@ Computing Machinery]
   \def\@journalName{ACM Transactions on Embedded Computing Systems}%
   \def\@journalNameShort{ACM Trans. Embedd. Comput. Syst.}%
   \def\@permissionCodeOne{1539-9087}%
+\or % TELO
+  \def\@journalName{ACM Transactions on Evolutionary Learning}%
+  \def\@journalNameShort{ACM Trans. Evol. Learn.}%
+  \def\@permissionCodeOne{2688-3007}%
 \or % THRI
   \def\@journalName{ACM Transactions on Human-Robot Interaction}%
   \def\@journalNameShort{ACM Trans. Hum.-Robot Interact.}%
@@ -1141,6 +1153,10 @@ Computing Machinery]
   \def\@journalName{ACM Transactions on Sensor Networks}%
   \def\@journalNameShort{ACM Trans. Sensor Netw.}%
   \def\@permissionCodeOne{1550-4859}%
+\or % TQC
+  \def\@journalName{ACM Transactions on Quantum Computing}%
+  \def\@journalNameShort{ACM Trans. Quantum Comput.}%
+  \def\@permissionCodeOne{2643-6817}%
 \or % TRETS
   \def\@journalName{ACM Transactions on Reconfigurable Technology and Systems}%
   \def\@journalNameShort{ACM Trans. Reconfig. Technol. Syst.}%
@@ -1161,6 +1177,10 @@ Computing Machinery]
   \def\@journalName{ACM Transactions on the Web}%
   \def\@journalNameShort{ACM Trans. Web}%
   \def\@permissionCodeOne{1559-1131}%
+\else % FACMP, a dummy journal
+  \def\@journalName{Forthcoming ACM Publication}%
+  \def\@journalNameShort{ACM Forthcoming}%
+  \def\@permissionCodeOne{XXXX-XXXX}%
 \fi
 \ClassInfo{\@classname}{Using journal code \@journalCode}%
 }{%
@@ -1361,7 +1381,10 @@ Computing Machinery]
 \def\keywords#1{\def\@keywords{#1}}
 \keywords{}
 \renewenvironment{abstract}{\Collect@Body\@saveabstract}{}
-\long\def\@saveabstract#1{\long\gdef\@abstract{#1}}
+\long\def\@saveabstract#1{\if@ACM@maketitle@typeset
+  \ClassError{\@classname}{Abstract must be defined before maketitle
+    command. Please move it!}\fi
+  \long\gdef\@abstract{#1}}
 \@saveabstract{}
 \long\def\@lempty{}
 \define@boolkey+{@ACM@topmatter@}[@ACM@]{printccs}[true]{%
@@ -1682,6 +1705,7 @@ Computing Machinery]
    \fi}}
 \newbox\mktitle@bx
 \def\maketitle{%
+  \@ACM@maketitle@typesettrue
   \if@ACM@anonymous
     % Anonymize omission of \author-s
     \ifnum\num@authorgroups=0\author{}\fi
@@ -2224,17 +2248,17 @@ Computing Machinery]
   \ifnum\num@authorgroups>1\relax
   addresses: \else address: \fi
   \bgroup
-  \def\streetaddress##1{\unskip\@addpunct, ##1}%
-  \def\postcode##1{\unskip\@addpunct, ##1}%
+  \def\streetaddress##1{\unskip, ##1}%
+  \def\postcode##1{\unskip, ##1}%
   \def\position##1{\unskip\ignorespaces}%
-  \def\institution##1{\unskip\@addpunct, ##1}%
-  \def\city##1{\unskip\@addpunct, ##1}%
-  \def\state##1{\unskip\@addpunct, ##1}%
+  \def\institution##1{\unskip, ##1}%
+  \def\city##1{\unskip, ##1}%
+  \def\state##1{\unskip, ##1}%
   \renewcommand\department[2][0]{\unskip\@addpunct, ##2}%
-  \def\country##1{\unskip\@addpunct, ##1}%
-  \def\and{\unskip\@addpunct; }%
+  \def\country##1{\unskip, ##1}%
+  \def\and{\unskip; }%
   \def\@author##1{##1}%
-  \def\email##1##2{\unskip\@addpunct, \nolinkurl{##2}}%
+  \def\email##1##2{\unskip, \nolinkurl{##2}}%
   \addresses
   \egroup}
 \def\@setaddresses{}
@@ -2319,7 +2343,8 @@ Computing Machinery]
   \newcount\ACM@linecount
   \ACM@linecount\@ne\relax
   \def\ACM@mk@linecount{%
-    \savebox{\ACM@linecount@bx}[4em][t]{\parbox[t]{4em}{%
+    \savebox{\ACM@linecount@bx}[4em][t]{\parbox[t]{4em}{\normalfont
+        \normalsize
         \setlength{\ACM@linecount@bxht}{0pt}%
         \loop{\color{red}\scriptsize\the\ACM@linecount}\\
         \global\advance\ACM@linecount by \@ne

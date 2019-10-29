@@ -8,7 +8,12 @@ BIBS := $(wildcard *.bib)
 LATEX = pdflatex
 BIBTEX = bibtex
 
+.PHONY: all
 all: $(MAINS:=.pdf)
+
+.PHONY: display
+display: $(MAINS:=.pdf)
+	evince $(MAINS:=.pdf)
 
 $(MAINS:=.pdf) : %.pdf : ${TEXS} ${TABLES} ${BIBS} ${FIGS} ${PLOTS}
 	-rm -f $*.aux

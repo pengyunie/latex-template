@@ -45,6 +45,7 @@
 
 %%% Miscellaneous
 %\usepackage{flushend} % balance the end of double column document
+\usepackage{datetime} % for getting current date and time
 
 %%%----------
 %%% Utility Commands
@@ -76,6 +77,9 @@
   \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 \newcolumntype{R}[1]{>{\RaggedLeft\arraybackslash}p{#1}}
 \newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+
+% for including revision info in the document
+\newcommand{\RevisionInfo}{\Fix{Time: \today{} at \currenttime{.}}}
 
 \input{defs-logic} % for logic symbols
 \input{defs-code} % for code listings

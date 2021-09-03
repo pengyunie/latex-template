@@ -3,6 +3,7 @@
 %%%  @BibTeX-style-file{
 %%%     author          = "Nelson H. F. Beebe, Boris Veytsman and Gerald Murray",
 %%%     version         = "2.1",
+%%%     acmart-version  = "1.79",
 %%%     date            = "14 June 2017",
 %%%     filename        = "ACM-Reference-Format.bst",
 %%%     email           = "borisv@lk.net, boris@varphi.com",
@@ -692,7 +693,7 @@ FUNCTION { output.note } % UTAH
 { % return with stack empty
   note empty.or.unknown
     { }
-    { "\shownote{" note add.period$ * "}" * writeln }
+    { "\shownote{" note * "}" add.period$ * writeln }
   if$
 }
 
@@ -700,7 +701,7 @@ FUNCTION { output.note.check } % UTAH
 { % return with stack empty
   note empty.or.unknown
     { "empty note in " cite$ * warning$ }
-    { "\shownote{" note add.period$ * "}" * writeln }
+    { "\shownote{" note * "}" add.period$ * writeln }
   if$
 }
 
@@ -770,7 +771,7 @@ FUNCTION { output.year.check }
   year empty.or.unknown
      { "empty year in " cite$ * warning$
        write$
-       " \bibinfo{year}{[n.d.]}"
+       " \bibinfo{year}{[n.\,d.]}"
        "\natexlab{" extra.label * "}" * *
        mid.sentence 'output.state :=
      }
@@ -1989,7 +1990,7 @@ FUNCTION { calc.basic.label }
   if$
   duplicate$
   year empty.or.unknown
-    { "[n.d.]" }
+    { "[n.\,d.]" }
     { year field.or.null purify$ #-1 #4 substring$}
   if$
   *
@@ -2037,7 +2038,7 @@ FUNCTION { calc.label }
   % save the year for sort processing afterwards (adding a, b, c, etc.)
   %
   year empty.or.unknown
-    { "[n.d.]" }
+    { "[n.\,d.]" }
     { year field.or.null purify$ #-1 #4 substring$}
   if$
   'label.year :=
@@ -2429,7 +2430,7 @@ FUNCTION { phdthesis }
   new.block
   format.title emphasize "title" output.check  % NB: ACM style requires emphasized thesis title
   new.block
-  "\bibinfo{thesistype}{Ph.D. Dissertation}" format.thesis.type output
+  "\bibinfo{thesistype}{Ph.\,D. Dissertation}" format.thesis.type output
   new.sentence
   school "school" bibinfo.output.check
   address empty.or.unknown

@@ -37,7 +37,7 @@
 %%   Right brace   \}     Tilde         \~}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{acmart}
-[2021/05/01 v1.78 Typesetting articles for the Association for Computing Machinery]
+[2021/08/29 v1.79 Typesetting articles for the Association for Computing Machinery]
 \def\@classname{acmart}
 \InputIfFileExists{acmart-preload-hook.tex}{%
   \ClassWarning{\@classname}{%
@@ -1094,14 +1094,20 @@
   \def\@permissionCodeOne{2375-4699}%
 \or % TAP
   \def\@journalName{ACM Transactions on Applied Perception}%
+  \def\@journalNameShort{ACM Trans. Appl. Percept.}%
+  \def\@permissionCodeOne{1544-3558}%
 \or % TCPS
   \def\@journalName{ACM Transactions on Cyber-Physical Systems}%
+  \def\@journalNameShort{ACM Trans. Cyber-Phys. Syst.}%
+  \def\@permissionCodeOne{2378-962X}%
 \or % TDS
   \def\@journalName{ACM/IMS Transactions on Data Science}%
   \def\@journalNameShort{ACM/IMS Trans. Data Sci.}%
   \def\@permissionCodeOne{2577-3224}%
 \or % TEAC
   \def\@journalName{ACM Transactions on Economics and Computation}%
+  \def\@journalNameShort{ACM Trans. Econ. Comput.}%
+  \def\@permissionCodeOne{2167-8375}%
 \or % TECS
   \def\@journalName{ACM Transactions on Embedded Computing Systems}%
   \def\@journalNameShort{ACM Trans. Embedd. Comput. Syst.}%
@@ -3061,6 +3067,14 @@
        arXiv:#2%
     \fi
   \fi}
+\def\theindex{\@restonecoltrue\if@twocolumn\@restonecolfalse\fi
+  \columnseprule\z@ \columnsep 35\p@
+  \@indextitlestyle
+  \let\item\@idxitem
+  \parindent\z@  \parskip\z@\@plus.3\p@\relax
+  \raggedright
+  \hyphenpenalty\@M
+  \footnotesize}
 \let\@vspace@orig=\@vspace
 \let\@vspacer@orig=\@vspacer
 \apptocmd{\@vspace}{\ClassWarning{\@classname}{\string\vspace\space should

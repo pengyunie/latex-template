@@ -1,6 +1,6 @@
 .PHONY: all
 all: 
-	latexmk -pdf main.tex -synctex=1 -interaction=nonstopmode -file-line-error
+	latexmk -pdf main.tex -synctex=1 -file-line-error
 
 .PHONY: auto
 auto:

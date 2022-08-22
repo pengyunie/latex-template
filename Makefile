@@ -7,5 +7,6 @@ auto:
 	latexmk -pdf -pvc main.tex -synctex=1 -interaction=nonstopmode -file-line-error
 
 .PHONY: clean
-clean: 
-	latexmk -c
+clean:
+	rm -f main.bbl
+	latexmk -C

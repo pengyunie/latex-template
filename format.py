@@ -92,7 +92,10 @@ def format_tex(s: str, rec: bool = False, squeeze_lines: bool = False):
                     # end while
                                         
                     end = j + 1
-                                        
+
+                    if output[beg - 1] == '\n' and output[end] == '\n':
+                        end = end + 1 # do not leave a blank line because of removing
+                    # end if
                     output= output[0:beg] + output[end:]
                     if depth > 0:
                         print(f"Warning: unexpected EOF. remaining unmatched bracket {depth}")

@@ -5,6 +5,7 @@ def format_tex(s: str, rec: bool = False, squeeze_lines: bool = False):
     output = ""
     formatted_lines = [""]
     for line in s.split("\n"):
+        line = line.strip()
         # remove comment
         if len(line) > 0 and line[0] == "%":  continue  # skip pure comment line
 
@@ -38,6 +39,24 @@ def format_tex(s: str, rec: bool = False, squeeze_lines: bool = False):
                                   rec=True,
                                   squeeze_lines=False)
             # end if
+        # end if
+
+        # embed \lstinputlisting
+        keyword = "\\lstinputlisting"
+        if line.startswith(keyword):
+            file_inputed = line[line.index("{")+1:].split("}")[0]
+            file_included = file_inputed if "." in file_inputed else file_inputed + ".tex"
+            with open(file_included, "r") as f:
+                input_included = f.read()
+            # end with
+            print(f"formatting {file_included}")
+            listing_option = line[line.index("[")+1:line.index("]")]
+            line = "\\begin{lstlisting}[" + listing_option + "]\n"
+            line += input_included
+            if not input_included.endswith("\n"):
+                line += "\n"
+            #end if
+            line += "\\end{lstlisting}"
         # end if
 
         if squeeze_lines:

@@ -23,4 +23,4 @@ rm -rf source/
 
 set +x
 set +e
-echo "Did you remember to clean irrelevant files before packaging? You can (1) run `git clean . -xdi` (2) manually delete unused files in figs/ and tables/" >&2
+echo 'Did you remember to clean irrelevant files before packaging? You can (1) run `git clean . -xdi` (2) manually delete unused files in figs/ and tables/' >&2

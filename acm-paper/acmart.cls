@@ -38,7 +38,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{acmart}
-[2023/03/30 v1.90 Typesetting articles for the Association for Computing Machinery]
+[2023/10/14 v1.92 Typesetting articles for the Association for Computing Machinery]
 \def\@classname{acmart}
 \InputIfFileExists{acmart-preload-hook.tex}{%
   \ClassWarning{\@classname}{%
@@ -598,10 +598,10 @@
         \rule\z@\footnotesep\ignorespaces#1\@finalstrut\strutbox}%
     \color@endgroup}}
 \def\@makefnmark{\hbox{\@textsuperscript{\normalfont\@thefnmark}}}
-\RequirePackage{hyperxmp}
 \let\@footnotemark@nolink\@footnotemark
 \let\@footnotetext@nolink\@footnotetext
 \RequirePackage[bookmarksnumbered,unicode]{hyperref}
+\RequirePackage{hyperxmp}
 \pdfstringdefDisableCommands{%
   \def\addtocounter#1#2{}%
   \def\unskip{}%
@@ -1791,6 +1791,8 @@
      \g@addto@macro{\@acmCodeDataLink}{\\ \url{#1}}%
   \fi}
 \def\@acmCodeDataLink{}
+\def\acmContributions#1{\gdef\@acmContributions{#1}}
+\acmContributions{}
 \let\acmDataLink\acmCodeLink
 \RequirePackage{comment}
 \excludecomment{CCSXML}
@@ -2092,6 +2094,7 @@
    }
    License.}%
  \fi}
+%%
 \def\copyrightyear#1{\def\@copyrightyear{#1}}
 \copyrightyear{\@acmYear}
 \def\@teaserfigures{}
@@ -2298,6 +2301,9 @@
     \fi
     \ifx\@keywords\@empty\else\bigskip
       Keywords: \@keywords\par
+    \fi
+    \ifx\@acmContributions\@empty\else\bigskip
+      \@acmContributions\par
     \fi
     \ifx\@empty\@authorsaddresses\else\bigskip\@setauthorsaddresses\fi
     \zsaveposy{@ACM@acmcpbox@y}%
@@ -3050,7 +3056,7 @@
   \renewcommand{\footrulewidth}{0.1\p@}%
   \fancyheadoffset[L]{46pt}%
   \fancyhead[L]{\makebox[\z@][l]{%
-      \raisebox{-\dimexpr(0.25\textheight*\ACM@ArticleType@nr)}{%
+      \raisebox{-\dimexpr(0.2\textheight*(\ACM@ArticleType@nr-2))}{%
       \rotatebox{90}{\colorbox{@ACM@Article@color}{\color{white}%
           \strut\ACM@ArticleType~Article}}}}%
     \ACM@linecountL}%
@@ -3172,7 +3178,7 @@
   \renewcommand{\footrulewidth}{0.1\p@}%
   \fancyheadoffset[L]{46pt}%
   \fancyhead[L]{\makebox[\z@][l]{%
-      \raisebox{-\dimexpr(0.25\textheight*\ACM@ArticleType@nr)}{%
+      \raisebox{-\dimexpr(0.2\textheight*(\ACM@ArticleType@nr-2))}{%
       \rotatebox{90}{\colorbox{@ACM@Article@color}{\color{white}%
           \strut\ACM@ArticleType~Article}}}}%
     \ACM@linecountL\@acmBadgeL}%

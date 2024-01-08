@@ -9,8 +9,8 @@ mkdir source
 python3 format.py main.tex
 mv formatted.tex source/main.tex
 
-# ACM-specific
-cp main.bbl ACM-Reference-Format.bst acmart.cls source/
+# IEEE-specific
+cp main.bbl bib.bib IEEEtran.bst IEEEtranS.bst IEEEtran.cls source/
 
 cp -r defs source/
 cp -r figs source/

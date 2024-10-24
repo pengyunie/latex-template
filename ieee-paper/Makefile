@@ -1,12 +1,21 @@
-.PHONY: all
-all: 
-	latexmk -pdf main.tex -synctex=1 -file-line-error
+MAIN := main
+TARGETS := $(MAIN)
 
-.PHONY: auto
-auto:
-	latexmk -pdf -pvc main.tex -synctex=1 -interaction=nonstopmode -file-line-error
+TARGETS_PATTERN := ($(shell echo $(TARGETS) | sed 's/ /|/g'))
+DEPENDENCIES := $(shell find . -type f | grep -v -E "/$(TARGETS_PATTERN)\." | grep -v -E "\.gitignore|pdflatex2041000\.fls|\.DS_Store|\*~")
+
+
+.PHONY: all
+all: $(TARGETS:=.pdf)
+
+$(TARGETS) : % : %.pdf
+
+$(TARGETS:=.pdf) : %.pdf : %.tex $(DEPENDENCIES)
+	latexmk -pdf $< -synctex=1 -file-line-error -interaction=nonstopmode -halt-on-error -logfilewarninglist
+
+$(TARGETS:=-auto) : %-auto : %.tex $(DEPENDENCIES)
+	latexmk -pdf $< -synctex=1 -file-line-error -interaction=nonstopmode -halt-on-error -logfilewarninglist -pvc
 
 .PHONY: clean
 clean:
-	rm -f main.bbl
 	latexmk -C

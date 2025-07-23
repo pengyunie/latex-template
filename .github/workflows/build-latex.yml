@@ -1,0 +1,46 @@
+name: Compile
+
+on:
+  push:
+    branches: [master, main]
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    container: texlive/texlive:latest
+    concurrency:
+      group: global
+      cancel-in-progress: true
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Compile ACM paper
+        run: cd acm-paper && make
+
+      - name: Compile IEEE paper
+        run: cd ieee-paper && make
+
+      - name: Compile standalone paper
+        run: cd standalone && make
+
+      - name: Copy PDFs to root with descriptive names
+        run: |
+          cp acm-paper/main.pdf acm-paper.pdf
+          cp ieee-paper/main.pdf ieee-paper.pdf
+          cp standalone/main.pdf standalone.pdf
+
+      - name: Update git tag
+        run: |
+          git config --global --add safe.directory $PWD
+          git tag -f auto-compile
+          git push -f origin auto-compile
+
+      - uses: ncipollo/release-action@v1
+        with:
+          name: auto-compile
+          tag: auto-compile
+          body: automatically compiled on sha ${{ github.sha }}
+          allowUpdates: true
+          artifacts: "acm-paper.pdf,ieee-paper.pdf,standalone.pdf"
+          prerelease: true 

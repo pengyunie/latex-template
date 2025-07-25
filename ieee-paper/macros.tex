@@ -1,9 +1,15 @@
 %%% macros.tex
 %%% Import packages, define utility commands and define macros
-%%% Version 1.2.0-ieee on 2024-01-08
+%%% Version 1.3.0-ieee on 2025-07-25
 
 %%%----------
 %%% Imports
+
+%%% Template specific - IEEE
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{textcomp}
+\usepackage{cite}
 
 %%% Text Formatting
 \usepackage{xspace}
@@ -11,17 +17,12 @@
 \usepackage{graphicx}
 \usepackage[normalem]{ulem} % normalem do not replace \emph to underline
 \usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsfonts}
 \usepackage{enumitem}
-\usepackage{textcomp}
 
 %%% Reference, Citation and Link
 \usepackage{hyperref}
 \hypersetup{linkcolor=black,citecolor=black,anchorcolor=black,filecolor=black,menucolor=black,runcolor=black,urlcolor=black,hidelinks}
-%\usepackage{url}
 \usepackage{breakurl}
-\usepackage{cite}
 
 %%% Tables
 \usepackage{booktabs}
@@ -32,8 +33,7 @@
 %%% Plots
 \usepackage{caption}
 \usepackage{subcaption}
-%\usepackage{subfloat}
-%\usepackage{wrapfig}
+%\usepackage{wrapfig} % for small wrap figures - if needed
 
 % Code
 \usepackage{listings}
@@ -54,19 +54,32 @@
 %%%----------
 %%% Utility Commands
 
-\newcommand{\XSpace}[1]{}
-\newcommand{\XComment}[1]{}
-\newcommand{\Fix}[1]{\textcolor{red}{#1}}
-\newcommand{\EditAdd}[1]{\textcolor{green}{[#1]}}
-\newcommand{\EditRm}[1]{\textcolor{red}{[\sout{#1}]}}
-\newcommand{\EditMod}[2]{\textcolor{red}{[\sout{#1}]}\textcolor{green}{[#2]}}
-\newcommand{\DefMacro}[2]{\expandafter\newcommand\csname rmk-#1\endcsname{#2}}
+% Define/Use macros (beyond tex's variable naming restrictions)
+\makeatletter
+\newcommand{\DefMacro}{\@ifstar\@DefMacroAllowRedefine\@DefMacro}
+\newcommand{\@DefMacro}[2]{\expandafter\newcommand\csname rmk-#1\endcsname{#2}}
+\newcommand{\@DefMacroAllowRedefine}[2]{\expandafter\providecommand\csname rmk-#1\endcsname{} \expandafter\renewcommand\csname rmk-#1\endcsname{#2}}
+\makeatother
 \newcommand{\UseMacro}[1]{\csname rmk-#1\endcsname}
 
+% for commenting. Make sure they are not used in the submitted version (try compiling with them commented out)
+\newcommand{\Fix}[1]{\textcolor{red}{#1}}
+\newcommand{\pengyu}[1]{\textcolor{blue}{#1}}
+
+% for showing diff (for camera ready, major revision etc.)
+\newcommand{\EditAdd}[1]{\textcolor{blue}{#1}}
+\newcommand{\EditRm}[1]{\textcolor{red}{\sout{#1}}}
+\newcommand{\EditMod}[2]{\textcolor{red}{\sout{#1}}\textcolor{blue}{#2}}
+
+% for cutting single words / short phrases
+\newcommand{\XSpace}[1]{}
+\newcommand{\XComment}[1]{}
+
+% for paragraphs
 \newcommand{\MyPara}[1]{\noindent\textbf{#1}.}
 \newcommand{\MyParaOnly}[1]{\noindent\textbf{#1}}
-\newcommand{\reducedstrut}{\vrule width 0pt height .9\ht\strutbox depth .9\dp\strutbox\relax}
-\newcommand{\InputWithSpace}[1]{\bgroup\def\arraystretch{1.1}\input{#1}\egroup}
+
+% for code
 \newcommand{\Code}[1]{{\ifmmode{\mathtt{#1}}\else$\mathtt{#1}$\fi}}
 \newcommand{\CodeIn}[1]{{\ifmmode{\mathtt{#1}}\else$\mathtt{#1}$\fi}}
 \newcommand{\ColorBack}[1]{%
@@ -107,14 +120,12 @@
 %%% Tables
 
 % Captions
-%\newcommand{\TableCaptionXXX}{Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit.\label{fig:table:xxx}}
+%\DefMacro{\TC-xxx}{Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit.\label{fig:table:xxx}}
 
 % Headers
-%\newcommand{\TableHeadXXX}{Yyy\xspace}
+%\DefMacro{\TH-xxx}{Yyy\xspace}
 
 
 %%% Numbers
 
 %\input{tables/numbers-xxx}
-
-%\newcommand{\NumXXX}{42\xspace}

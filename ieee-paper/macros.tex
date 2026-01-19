@@ -1,6 +1,6 @@
 %%% macros.tex
 %%% Import packages, define utility commands and define macros
-%%% Version 1.3.1-ieee on 2025-10-09
+%%% Version 1.3.2-ieee on 2026-01-19
 
 %%%----------
 %%% Imports
@@ -67,9 +67,19 @@
 \newcommand{\pengyu}[1]{\textcolor{blue}{#1}}
 
 % for showing diff (for camera ready, major revision etc.)
+% uncomment to show the colored diff
 \newcommand{\EditAdd}[1]{\textcolor{blue}{#1}}
 \newcommand{\EditRm}[1]{\textcolor{red}{\sout{#1}}}
 \newcommand{\EditMod}[2]{\textcolor{red}{\sout{#1}}\textcolor{blue}{#2}}
+\newcommand{\EditMvAdd}[1]{\textcolor{yellow}{#1}}
+\newcommand{\EditMvRm}[1]{\textcolor{yellow}{\sout{#1}}}
+
+% uncomment to show the new version
+% \newcommand{\EditAdd}[1]{#1}
+% \newcommand{\EditRm}[1]{}
+% \newcommand{\EditMod}[2]{#2}
+% \newcommand{\EditMvAdd}[1]{#1}
+% \newcommand{\EditMvRm}[1]{}
 
 % for cutting single words / short phrases
 \newcommand{\XSpace}[1]{}

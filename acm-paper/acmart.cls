@@ -36,9 +36,10 @@
 %%   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %%   Right brace   \}     Tilde         \~}
 
+
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{acmart}
-[2024/05/27 v2.08 Typesetting articles for the Association for Computing Machinery]
+[2025/08/27 v2.16 Typesetting articles for the Association for Computing Machinery]
 \def\@classname{acmart}
 \InputIfFileExists{acmart-preload-hook.tex}{%
   \ClassWarning{\@classname}{%
@@ -47,13 +48,13 @@
 \RequirePackage{xkeyval}
 \RequirePackage{xstring}
 \RequirePackage{iftex}
-\define@choicekey*+{acmart.cls}{format}[\ACM@format\ACM@format@nr]{%
+\define@choicekey*+{\@classname.cls}{format}[\ACM@format\ACM@format@nr]{%
   manuscript, acmsmall, acmlarge, acmtog, sigconf, siggraph,
   sigplan, sigchi, sigchi-a, acmengage, acmcp}[manuscript]{}{%
   \ClassError{\@classname}{The option format must be manuscript,
     acmsmall, acmlarge, acmtog, sigconf, siggraph,
     sigplan, sigchi or sigchi-a}}
-\def\@DeclareACMFormat#1{\DeclareOptionX{#1}{\setkeys{acmart.cls}{format=#1}}}
+\def\@DeclareACMFormat#1{\DeclareOptionX{#1}{\setkeys{\@classname.cls}{format=#1}}}
 \@DeclareACMFormat{manuscript}
 \@DeclareACMFormat{acmsmall}
 \@DeclareACMFormat{acmlarge}
@@ -66,7 +67,7 @@
 \@DeclareACMFormat{acmengage}
 \@DeclareACMFormat{acmcp}
 \ExecuteOptionsX{format}
-\define@boolkey+{acmart.cls}[@ACM@]{screen}[true]{%
+\define@boolkey+{\@classname.cls}[@ACM@]{screen}[true]{%
   \if@ACM@screen
     \PackageInfo{\@classname}{Using screen mode}%
   \else
@@ -74,7 +75,7 @@
   \fi}{\PackageError{\@classname}{The option screen can be either true or
     false}}
 \ExecuteOptionsX{screen=false}
-\define@boolkey+{acmart.cls}[@ACM@]{urlbreakonhyphens}[true]{%
+\define@boolkey+{\@classname.cls}[@ACM@]{urlbreakonhyphens}[true]{%
   \if@ACM@urlbreakonhyphens
     \PackageInfo{\@classname}{Using breaking urls on hyphens}%
   \else
@@ -82,7 +83,7 @@
   \fi}{\PackageError{\@classname}{The option urlbreakonhyphens can be either true or
     false}}
 \ExecuteOptionsX{urlbreakonhyphens=true}
-\define@boolkey+{acmart.cls}[@ACM@]{acmthm}[true]{%
+\define@boolkey+{\@classname.cls}[@ACM@]{acmthm}[true]{%
   \if@ACM@acmthm
     \PackageInfo{\@classname}{Requiring acmthm}%
   \else
@@ -90,7 +91,7 @@
   \fi}{\PackageError{\@classname}{The option acmthm can be either true or
     false}}
 \ExecuteOptionsX{acmthm=true}
-\define@boolkey+{acmart.cls}[@ACM@]{review}[true]{%
+\define@boolkey+{\@classname.cls}[@ACM@]{review}[true]{%
   \if@ACM@review
     \PackageInfo{\@classname}{Using review mode}%
     \AtBeginDocument{\@ACM@printfoliostrue}%
@@ -99,7 +100,7 @@
   \fi}{\PackageError{\@classname}{The option review can be either true or
     false}}
 \ExecuteOptionsX{review=false}
-\define@boolkey+{acmart.cls}[@ACM@]{authorversion}[true]{%
+\define@boolkey+{\@classname.cls}[@ACM@]{authorversion}[true]{%
   \if@ACM@authorversion
     \PackageInfo{\@classname}{Using authorversion mode}%
   \else
@@ -107,7 +108,7 @@
   \fi}{\PackageError{\@classname}{The option authorversion can be either true or
     false}}
 \ExecuteOptionsX{authorversion=false}
-\define@boolkey+{acmart.cls}[@ACM@]{nonacm}[true]{%
+\define@boolkey+{\@classname.cls}[@ACM@]{nonacm}[true]{%
   \if@ACM@nonacm
     \PackageInfo{\@classname}{Using nonacm mode}%
     \AtBeginDocument{\@ACM@printacmreffalse}%
@@ -119,15 +120,15 @@
   \fi}{\PackageError{\@classname}{The option nonacm can be either true or
     false}}
 \ExecuteOptionsX{nonacm=false}
-\define@boolkey+{acmart.cls}[@ACM@]{balance}[true]{}{%
+\define@boolkey+{\@classname.cls}[@ACM@]{balance}[true]{}{%
   \PackageError{\@classname}{The option balance can be either true or
     false}}
 \ExecuteOptionsX{balance}
-\define@boolkey+{acmart.cls}[@ACM@]{pbalance}[true]{}{%
+\define@boolkey+{\@classname.cls}[@ACM@]{pbalance}[true]{}{%
   \PackageError{\@classname}{The option pbalance can be either true or
     false}}
 \ExecuteOptionsX{pbalance=false}
-\define@boolkey+{acmart.cls}[@ACM@]{natbib}[true]{%
+\define@boolkey+{\@classname.cls}[@ACM@]{natbib}[true]{%
   \if@ACM@natbib
     \PackageInfo{\@classname}{Explicitly selecting natbib mode}%
   \else
@@ -135,7 +136,7 @@
   \fi}{\PackageError{\@classname}{The option natbib can be either true or
     false}}
 \ExecuteOptionsX{natbib=true}
-\define@boolkey+{acmart.cls}[@ACM@]{anonymous}[true]{%
+\define@boolkey+{\@classname.cls}[@ACM@]{anonymous}[true]{%
   \if@ACM@anonymous
     \PackageInfo{\@classname}{Using anonymous mode}%
   \else
@@ -143,7 +144,7 @@
   \fi}{\PackageError{\@classname}{The option anonymous can be either true or
     false}}
 \ExecuteOptionsX{anonymous=false}
-\define@boolkey+{acmart.cls}[@ACM@]{timestamp}[true]{%
+\define@boolkey+{\@classname.cls}[@ACM@]{timestamp}[true]{%
   \if@ACM@timestamp
     \PackageInfo{\@classname}{Using timestamp mode}%
   \else
@@ -151,7 +152,7 @@
   \fi}{\PackageError{\@classname}{The option timestamp can be either true or
     false}}
 \ExecuteOptionsX{timestamp=false}
-\define@boolkey+{acmart.cls}[@ACM@]{authordraft}[true]{%
+\define@boolkey+{\@classname.cls}[@ACM@]{authordraft}[true]{%
   \if@ACM@authordraft
     \PackageInfo{\@classname}{Using authordraft mode}%
     \@ACM@timestamptrue
@@ -189,13 +190,13 @@
 \ClassWarning{\@classname}{%
   The format siggraph is now obsolete.\MessageBreak
   I am switching to sigconf.}
-  \setkeys{acmart.cls}{format=sigconf}
+  \setkeys{\@classname.cls}{format=sigconf}
 \fi
 \ifnum\ACM@format@nr=7\relax % sigchi
 \ClassWarning{\@classname}{%
   The format sigchi is now obsolete.\MessageBreak
   I am switching to sigconf.}
-  \setkeys{acmart.cls}{format=sigconf}
+  \setkeys{\@classname.cls}{format=sigconf}
 \fi
 \ifnum\ACM@format@nr=8\relax % sigchi
 \ClassWarning{\@classname}{%
@@ -289,7 +290,6 @@
 \RequirePackage{setspace}
 \onehalfspacing
 \fi
-\RequirePackage{textcase}
 \if@ACM@acmcp
 \RequirePackage{framed}
 \RequirePackage{zref-savepos, zref-user}
@@ -546,7 +546,6 @@
       \fi}%
   \fi
   \ignorespaces}
-\def\@seccntformat#1{\csname the#1\endcsname\quad}
 \def\@ssect#1#2#3#4#5{%
   \@tempskipa #3\relax
   \ifdim \@tempskipa>\z@
@@ -559,6 +558,7 @@
     \def\@svsechd{#4{\hskip #1\relax #5}}%
   \fi
   \@xsect{#3}}
+\def\@seccntformat#1{\csname the#1\endcsname\quad}
 \def\@starttoc#1#2{\begingroup\makeatletter
   \setTrue{#1}%
   \par\removelastskip\vskip\z@skip
@@ -859,21 +859,23 @@
     have the newtxmath package installed.  Please upgrade your
     TeX}\@ACM@newfontsfalse}
 \if@ACM@newfonts
-  \RequirePackage[T1]{fontenc}
-  % Note that the order in which packages are loaded matters,
-  % and the correct order depends on the LaTeX engine used.
-  % See https://github.com/borisveytsman/acmart/issues/402
-  % and https://github.com/borisveytsman/acmart/issues/410
   \ifxetex
-    \RequirePackage[libertine]{newtxmath}
+    \RequirePackage{amssymb}
+    \RequirePackage{unicode-math}
+    \setmathfont[Scale=MatchUppercase]{LibertinusMath-Regular.otf}
+    \setmathfont{latinmodern-math.otf}[range={cal}]
     \RequirePackage[tt=false]{libertine}
     \setmonofont[StylisticSet=3]{inconsolata}
   \else
     \ifluatex
-      \RequirePackage[libertine]{newtxmath}
+      \RequirePackage{amssymb}
+      \RequirePackage{unicode-math}
+      \setmathfont[Scale=MatchUppercase]{LibertinusMath-Regular.otf}
+      \setmathfont{latinmodern-math.otf}[range={cal}]
       \RequirePackage[tt=false]{libertine}
       \setmonofont[StylisticSet=3]{inconsolata}
     \else
+       \RequirePackage[T1]{fontenc}
        \RequirePackage[tt=false, type1=true]{libertine}
        \RequirePackage[varqu]{zi4}
        \RequirePackage[libertine]{newtxmath}
@@ -892,7 +894,23 @@
 \@undescribed@imagesfalse
 \newcommand\Description[2][]{\global\@Description@presenttrue\ignorespaces}
 \AtEndDocument{\if@undescribed@images
-  \ClassWarningNoLine{\@classname}{Some images may lack descriptions}\fi}
+  \ClassWarningNoLine{\@classname}{Some images may lack
+    descriptions.\MessageBreak
+  ACM is committed to complying with the upcoming US ADA
+  https://accessiblyapp.com/accessibility-compliance/ada/ and European
+  Accessibility Act
+  (EAA) https://accessiblyapp.com/accessibility-compliance/eaa/
+  regulations by actively working to ensure our publications and
+  application services are accessible to individuals with
+  disabilities, adhering to the WCAG guidelines to provide a seamless
+  experience for all users, and regularly reviewing our accessibility
+  practices to maintain compliance with evolving standards. \MessageBreak
+  To this end, we strongly encourage our authors to provide
+  alternative text and captions for images and multimedia content. It
+  is also important to optimize color contrast for the visually
+  impaired. Taking these important steps when creating your papers
+  will ensure that the widest possible audience can ingest your
+  work.}\fi}
 \AtBeginEnvironment{figure}{\@Description@presentfalse
   \let\@vspace\@vspace@orig
   \let\@vspacer\@vspacer@orig}
@@ -924,6 +942,10 @@
 \AtBeginEnvironment{listing}{\let\@vspace\@vspace@orig
   \let\@vspacer\@vspacer@orig}
 \AtBeginEnvironment{listing*}{\let\@vspace\@vspace@orig
+  \let\@vspacer\@vspacer@orig}
+\AtBeginEnvironment{lstinputlisting}{\let\@vspace\@vspace@orig
+  \let\@vspacer\@vspacer@orig}
+\AtBeginEnvironment{lstinputlisting*}{\let\@vspace\@vspace@orig
   \let\@vspacer\@vspacer@orig}
 
 \RequirePackage{caption, float}
@@ -1073,6 +1095,8 @@
 \@ACM@maketitle@typesetfalse
 \define@choicekey*+{ACM}{acmJournal}[\@journalCode\@journalCode@nr]{%
   ACMJCSS,%
+  ACMJDS,%
+  AILET,%
   CIE,%
   CSUR,%
   DGOV,%
@@ -1101,6 +1125,8 @@
   TAAS,%
   TACCESS,%
   TACO,%
+  TAIS,%
+  TAISAP,%
   TALG,%
   TALLIP,%
   TAP,%
@@ -1152,6 +1178,16 @@
   \def\@journalNameShort{ACM J. Comput. Sustain. Soc.}%
   \def\@permissionCodeOne{2834-5533}%
   \def\@permissionCodeTwo{2834-5533}%
+\or % ACMJCDS
+  \def\@journalName{ACM Journal of Data Science}%
+  \def\@journalNameShort{ACM J. Data Sci.}%
+  \def\@permissionCodeOne{0000-0000}%
+  \def\@permissionCodeTwo{0000-0000}%
+\or % AILET
+  \def\@journalName{ACM AI Letters}%
+  \def\@journalNameShort{ACM AI Lett.}%
+  \def\@permissionCodeOne{3068-8590}%
+  \def\@permissionCodeTwo{3068-8590}%
 \or % CIE
   \def\@journalName{ACM Computers in Entertainment}%
   \def\@journalNameShort{ACM Comput. Entertain.}%
@@ -1303,6 +1339,16 @@
   \def\@journalNameShort{ACM Trans. Arch. Code Optim.}%
   \def\@permissionCodeOne{1544-3566}%
   \def\@permissionCodeTwo{1544-3973}%
+\or % TAIS
+  \def\@journalName{ACM Transactions on AI for Science}%
+  \def\@journalNameShort{ACM Trans. AI Sci.}%
+  \def\@permissionCodeOne{3066-4438}%
+  \def\@permissionCodeTwo{3066-4438}%
+\or % TAISAP
+  \def\@journalName{ACM Transactions on AI Security and Privacy}%
+  \def\@journalNameShort{ACM Trans. AI Secur. Priv.}%
+  \def\@permissionCodeOne{3068-3564}%
+  \def\@permissionCodeTwo{3068-3564}%
 \or % TALG
   \def\@journalName{ACM Transactions on Algorithms}%
   \def\@journalNameShort{ACM Trans. Algor.}%
@@ -1632,7 +1678,7 @@
   \def\position##1{\ignorespaces}%
   \def\institution##1{##1\ignorespaces}%
   \def\department{\@ifnextchar[{\@department}{\@department[]}}%
-  \def\@department[##1]##2{\unskip, ##2\ignorespaces}%
+  \def\@department[##1]##2{##2, \ignorespaces}%
   \let\city\position
   \let\state\position
   \let\country\position
@@ -1644,13 +1690,14 @@
     \g@addto@macro\addresses{\email{#1}{#2}}%
   \fi}
 \def\orcid#1{\unskip\ignorespaces%
+  \protected\def\orcidsite{https://orcid.org/}%
   \IfBeginWith{#1}{http}{%
     \expandafter\gdef\csname
         typeset@author\the\num@authors\endcsname##1{%
           \href{#1}{##1}}}{%
     \expandafter\gdef\csname
         typeset@author\the\num@authors\endcsname##1{%
-          \href{https://orcid.org/#1}{##1}}}}
+          \href{\orcidsite#1}{##1}}}}
 \def\authorsaddresses#1{\def\@authorsaddresses{#1}}
 \authorsaddresses{\@mkauthorsaddresses}
 \newcommand\@mktranslatedkeywords[2]{\bgroup
@@ -1684,10 +1731,12 @@
       \stepcounter{footnote}\footnotetext{#1}}%
   \fi}
 \newcommand\authornotemark[1][\relax]{%
-  \ifx#1\relax\relax\relax
-  \g@addto@macro\addresses{\@authornotemark}%
-  \else
-  \g@addto@macro\addresses{\@@authornotemark{#1}}%
+  \if@ACM@anonymous\else
+    \ifx#1\relax\relax\relax
+      \g@addto@macro\addresses{\@authornotemark}%
+    \else
+      \g@addto@macro\addresses{\@@authornotemark{#1}}%
+    \fi
   \fi}
 \def\acmVolume#1{\def\@acmVolume{#1}}
 \acmVolume{1}
@@ -1710,7 +1759,7 @@
 \def\acmSubmissionID#1{\def\@acmSubmissionID{#1}}
 \acmSubmissionID{}
 \def\acmISBN#1{\def\@acmISBN{#1}}
-\acmISBN{978-x-xxxx-xxxx-x/YY/MM}
+\acmISBN{978-x-xxxx-xxxx-x/YYYY/MM}
 \def\acmDOI#1{\def\@acmDOI{#1}}
 \acmDOI{10.1145/nnnnnnn.nnnnnnn}
 \newlength\@ACM@badge@width
@@ -1824,7 +1873,7 @@
   \fi}
 \AtEndDocument{%
   \ifx\@received\@empty\else
-    \par\bigskip\noindent\small\normalfont\@received\par
+    \par\bigskip\noindent{\small\normalfont\@received\par}%
   \fi}
 \define@choicekey+{ACM}{articletype}[\ACM@ArticleType\ACM@ArticleType@nr]{%
   Research,Review,Discussion,Invited,Position}[Review]{%
@@ -2001,22 +2050,6 @@
   Copyright held by the owner/author(s).
   \fi}
 \def\@formatdoi#1{\url{https://doi.org/#1}}
-\def\@ACM@copyright@check@cc{%
-  \if@ACM@nonacm
-     \ClassInfo{\@classname}{Using CC license with a non-acm
-       material}%
-  \else
-     \if@ACM@engage
-        \ClassInfo{\@classname}{Using CC license with ACM Enage
-          material}%
-      \else
-      \ClassWarning{\@classname}{%
-        Sorry, Creative Commons licenses are\MessageBreak
-        currently not used with ACM publications\MessageBreak
-        typeset by the authors}{Please use nonacm
-           option or ACM Engage class to enable CC licenses}%
-      \fi
-  \fi}
 \def\@copyrightpermission{%
   \ifcase\acm@copyrightmode\relax % none
   \or % acmcopyright
@@ -2054,7 +2087,7 @@
    Government and is in the public domain. Non-exclusive copying or
    redistribution is allowed, provided that the article citation is
    given and the authors and agency are clearly identified as its
-   source. All others Request permissions from
+   source. Request permissions from
    owner\hspace*{.5pt}/author(s).
   \or % usgovmixed
    ACM acknowledges that this contribution was authored or co-authored
@@ -2145,10 +2178,9 @@
    disseminate the work on their personal and corporate Web sites with
    the appropriate attribution.
  \or % CC
-   \@ACM@copyright@check@cc
    \IfEq{\ACM@cc@type}{zero}{%
-     \def\ACM@CC@Url{https://creativecommons.org/publicdomain/zero/1.0/legalcode}}{%
-  \edef\ACM@CC@Url{https://creativecommons.org/licenses/\ACM@cc@type/\ACM@cc@version/legalcode}}%
+     \def\ACM@CC@Url{https://creativecommons.org/publicdomain/zero/1.0}}{%
+  \edef\ACM@CC@Url{https://creativecommons.org/licenses/\ACM@cc@type/\ACM@cc@version}}%
    \href{\ACM@CC@Url}{\includegraphics[height=5ex]{doclicense-CC-\ACM@cc@type-88x31}}\\
    \href{\ACM@CC@Url}{%
    This work is licensed under a Creative Commons
@@ -2251,14 +2283,16 @@
          \if@ACM@engage
             {\itshape \@acmBooktitle, \@acmYear.}\par
          \else
-         {\itshape \acmConference@shortname, \acmConference@date, \acmConference@venue}\par
+         {\itshape \acmConference@shortname, \acmConference@venue}\par
          \fi
        \fi
     \fi
     \if@printcopyright
       \copyright\ \@copyrightyear\ \@copyrightowner\\
     \else
-      \@copyrightyear.\
+      \ifx\@copyrightyear\@empty\else
+        \@copyrightyear.\
+      \fi
     \fi
     \if@ACM@manuscript
       Manuscript submitted to ACM\\
@@ -2321,7 +2355,7 @@
     pdfsubject={\@concepts},
     pdfkeywords={\@keywords},
     pdfcreator={LaTeX with acmart
-      \csname ver@acmart.cls\endcsname\space
+      \csname ver@\@classname.cls\endcsname\space
       and hyperref
       \csname ver@hyperref.sty\endcsname}}%
   \andify\authors
@@ -2374,6 +2408,7 @@
     \fi
     \ifx\@empty\@authorsaddresses\else\bigskip\@setauthorsaddresses\fi
     \zsaveposy{@ACM@acmcpbox@y}%
+    \par
   }
 \egroup}
 \def\@specialsection#1{%
@@ -2691,9 +2726,9 @@
   \global\let\and\@typeset@author@line
   \def\@author##1{%
     \ifx\@currentauthors\@empty
-      \gdef\@currentauthors{\@authorfont\MakeTextUppercase{##1}}%
+      \gdef\@currentauthors{\@authorfont\MakeUppercase{##1}}%
     \else
-       \g@addto@macro{\@currentauthors}{\and\MakeTextUppercase{##1}}%
+       \g@addto@macro{\@currentauthors}{\and\MakeUppercase{##1}}%
     \fi
     \gdef\and{}}%
   \def\email##1##2{}%
@@ -2857,8 +2892,10 @@
     addresses are mandatory for ACM journals}%
   \fi\fi\fi}
 \def\@setaddresses{}
-\def\@authornotemark{\g@addto@macro\@currentauthors{\footnotemark\relax}}
-\def\@@authornotemark#1{\g@addto@macro\@currentauthors{\footnotemark[#1]}}
+\def\@authornotemark{\g@addto@macro\@currentauthors{%
+    \advance\hfuzz by 5pt\relax\footnotemark\relax}}
+\def\@@authornotemark#1{\g@addto@macro\@currentauthors{%
+    \advance\hfuzz by 5pt\relax\footnotemark[#1]}}
 \def\@mkteasers{%
   \ifx\@teaserfigures\@empty\else
     \def\@teaser##1{\par\bigskip\bgroup
@@ -3263,28 +3300,33 @@
  \fi
 }
 \def\ACM@adddotafter#1{\ifx\relax#1\relax\else\LTX@adddotafter{#1}\fi}
-\renewcommand\section{\@startsection{section}{1}{\z@}%
+\renewcommand\section{\def\@toclevel{1}%
+  \@startsection{section}{1}{\z@}%
   {-.75\baselineskip \@plus -2\p@ \@minus -.2\p@}%
   {.25\baselineskip}%
   {\ACM@NRadjust\@secfont}}
-\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+\renewcommand\subsection{\def\@toclevel{2}%
+  \@startsection{subsection}{2}{\z@}%
   {-.75\baselineskip \@plus -2\p@ \@minus -.2\p@}%
   {.25\baselineskip}%
   {\ACM@NRadjust\@subsecfont}}
-\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+\renewcommand\subsubsection{\def\@toclevel{3}%
+  \@startsection{subsubsection}{3}{\z@}%
   {-.5\baselineskip \@plus -2\p@ \@minus -.2\p@}%
   {-3.5\p@}%
   {\ACM@NRadjust{\@subsubsecfont\@adddotafter}}}
-\renewcommand\paragraph{\@startsection{paragraph}{4}{\parindent}%
+\renewcommand\paragraph{\def\@toclevel{4}%
+  \@startsection{paragraph}{4}{\parindent}%
   {-.5\baselineskip \@plus -2\p@ \@minus -.2\p@}%
   {-3.5\p@}%
   {\ACM@NRadjust{\@parfont\@adddotafter}}}
-\newcommand\noindentparagraph{\@startsection{paragraph}{4}{\z@}%
+\newcommand\noindentparagraph{\def\@toclevel{4}%
+  \@startsection{paragraph}{4}{\z@}%
   {-.5\baselineskip \@plus -2\p@ \@minus -.2\p@}%
   {-3.5\p@}%
   {\ACM@NRadjust{\@parfont}}}
-
-\renewcommand\part{\@startsection{part}{9}{\z@}%
+\renewcommand\part{\def\@toclevel{9}%
+  \@startsection{part}{9}{\z@}%
   {-10\p@ \@plus -4\p@ \@minus -2\p@}%
   {4\p@}%
   {\ACM@NRadjust\@parfont}}
@@ -3331,6 +3373,20 @@
  \def\@subsecfont{\bfseries\Large\section@raggedright}
 \or %acmcp
 \fi
+\AtBeginDocument{%
+  \@for\@tempa:=-1,0,1,2,3,4,5\do{%
+    \@ifundefined{r@tocindent\@tempa}{%
+      \@xp\gdef\csname r@tocindent\@tempa\endcsname{0pt}}{}%
+  }%
+}
+\def\@writetocindents{%
+  \begingroup
+  \@for\@tempa:=-1,0,1,2,3,4,5\do{%
+    \immediate\write\@auxout{%
+      \string\newlabel{tocindent\@tempa}{%
+        \csname r@tocindent\@tempa\endcsname}}%
+  }%
+  \endgroup}
 \def\@adddotafter#1{#1\@addpunct{.}}
 \def\@addspaceafter#1{#1\@addpunct{\enspace}}
 \if@ACM@acmcp
@@ -3572,6 +3628,26 @@
 \AtEndDocument{\ifx\baselinestretch\ACM@origbaselinestretch\else
   \ClassError{\@classname}{An attempt to redefine
     \string\baselinestretch\space detected.  Please do not do this for
+    ACM submissions!}\fi}
+\let\ACM@origsection\section
+\AtEndDocument{\ifx\section\ACM@origsection\else
+  \ClassError{\@classname}{An attempt to redefine
+    \string\section\space detected.  Please do not do this for
+    ACM submissions!}\fi}
+\let\ACM@origsubsection\subsection
+\AtEndDocument{\ifx\subsection\ACM@origsubsection\else
+  \ClassError{\@classname}{An attempt to redefine
+    \string\subsection\space detected.  Please do not do this for
+    ACM submissions!}\fi}
+\let\ACM@origsubsubsection\subsubsection
+\AtEndDocument{\ifx\subsubsection\ACM@origsubsubsection\else
+  \ClassError{\@classname}{An attempt to redefine
+    \string\subsubsection\space detected.  Please do not do this for
+    ACM submissions!}\fi}
+\let\ACM@origparagraph\paragraph
+\AtEndDocument{\ifx\paragraph\ACM@origparagraph\else
+  \ClassError{\@classname}{An attempt to redefine
+    \string\paragraph\space detected.  Please do not do this for
     ACM submissions!}\fi}
 \normalsize\normalfont\frenchspacing
 \endinput

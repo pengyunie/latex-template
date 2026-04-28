@@ -1,0 +1,63 @@
+%%% defs-code.tex
+%%% Utility Commands for Code Listings
+%%% Version 1.0.2
+
+%%%==========
+%%% COPIED FROM vkuncak/doc/vmcai09/defs.tex
+\definecolor{gray}{RGB}{211,211,211}
+\newcommand{\jbasicstyle}{\small\sffamily} % Style of code
+\newcommand{\textcode}[1]{{#1}}
+\newcommand{\jnumberstyle}{\scriptsize}
+\newcommand{\Hilight}{\makebox[0pt][l]{\color{gray}\rule[-3pt]{0.80\linewidth}{9pt}}}
+
+\lstdefinelanguage{pseudo}
+{
+  morekeywords={},
+  keywordstyle=\bfseries,
+  lineskip=-0.1em,
+  numbers=left, % none for no numbers
+  numberstyle=\jnumberstyle,
+  numbersep=4pt,
+  basicstyle=\jbasicstyle,
+  breaklines=true,
+  breakautoindent=true,
+  tabsize=2,
+  columns=fullflexible,
+  morecomment=*[l][\textsl]{//},
+  mathescape=true,
+  xleftmargin=10pt,
+%  mathescape=false,
+}
+
+\lstdefinelanguage{todo-comment}
+{
+  morekeywords={},
+  keywordstyle=\bfseries,
+  lineskip=-0.1em,
+  numbers=none,
+  basicstyle=\jbasicstyle,
+  breaklines=true,
+  breakautoindent=true,
+  tabsize=2,
+  columns=fullflexible,
+  morecomment=*[l][\textsl]{//},
+  mathescape=true,
+  xleftmargin=-10pt,
+%  mathescape=false,
+}
+
+\lstdefinelanguage{java-pretty}
+{
+  language=java,
+  numbers=left,
+  basicstyle=\scriptsize\ttfamily,
+  numberstyle=\scriptsize,
+  breaklines=true,
+  columns=fullflexible,
+  xleftmargin=16pt,
+  showstringspaces=false,
+}
+
+\lstset{escapeinside={(*@}{@*)}}
+
+%%%==========

@@ -1,0 +1,40 @@
+%%% defs-logic.tex
+%%% Utility Commands for Logic Symbols
+%%% Version 1.1.0
+
+%%% Basic Logic
+% True & False
+\newcommand{\ltrue}{\top} % ⊤
+\newcommand{\lfalse}{\bot} % ⊥
+
+% Operators
+% \land ∧
+% \lor ∨
+% \lnot ¬
+\newcommand{\limply}{\rightarrow} % →
+\newcommand{\liff}{\leftrightarrow} % ↔
+\newcommand{\lcofactor}{\downarrow} % ↓
+
+\newcommand{\llimply}{\Rightarrow} % ⇒
+\newcommand{\lliff}{\Leftrightarrow} % ⇔
+\newcommand{\lsat}{\vDash} % ⊨
+\newcommand{\lnsat}{\nvDash} % ⊭
+
+% Quantifiers
+\newcommand{\lqall}[1]{\forall #1.~} % ∀x.
+\newcommand{\lqexist}[1]{\exists #1.~} % ∃x.
+\newcommand{\lqallOnly}[1]{\forall #1 } % ∀x
+\newcommand{\lqexistOnly}[1]{\exists #1 } % ∃x
+
+% Big Operators
+\newcommand{\lAnd}[1]{\bigwedge_{\substack{#1}}} % ⋀
+\newcommand{\lOr}[1]{\bigvee_{\substack{#1}}} % ⋁
+
+%%% Set
+\newcommand{\set}[1]{\{#1\}} % {x, y, z}
+\newcommand{\Set}[1]{\left\{#1\right\}} % \left{ x, y, z \right}
+\newcommand{\tuple}[1]{\langle#1\rangle} % <a, b, c>
+\newcommand{\Tuple}[1]{\left\langle#1\right\rangle} % \left< a, b, c \right>
+
+\newcommand{\sunion}{\cup} % ∪
+\newcommand{\sinter}{\cap} % ∩
